@@ -1,0 +1,14 @@
+Source: pyshot
+Section: x11
+Priority: optional
+Maintainer: Kendall Weaver <kendalltweaver@gmail.com>
+Build-Depends: debhelper (>= 5.0.0)
+Standards-Version: 3.8.4
+
+Package: pyshot
+Depends:  python
+Architecture: all 
+Description:  Simple Screenshot app written in Python
+ Simple screenshot application written in Python for
+ inclusion in Peppermint OS.  Much thanks to Ikey
+ Doherty for the script. 
