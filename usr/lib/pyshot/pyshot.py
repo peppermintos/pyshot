@@ -13,9 +13,9 @@ except:
 
 '''
 PyShot is a small light weight screenshot utility written in pygtk.
-Some features include zoom-in, zoom-out, delay setting, and allows the user to choose between JPEG and PNG formats.
-Author: Ikey Doherty <contactjfreak@googlemail.com>
-Further Development: Nick Canupp <asheguy79@gmail.com>
+Some features include zoom-in, zoom-out, delay setting
+Authors: Ikey Doherty <ikey@linuxmint.com>, Nick Canupp <asheguy79@gmail.com>
+Packaging: Kendall Weaver <kendalltweaver@gmail.com>
 License: GPL
 '''
 class Shotter:
