@@ -107,48 +107,24 @@ class Shotter:
    def save_image(self, widget):
 	  # Format options
       format = None
-      frame = gtk.Frame("Image options")
-      wid = gtk.VBox()
-      jpg = gtk.RadioButton(None, "JPEG format")
-      wid.pack_start(jpg, False, False)
-      png = gtk.RadioButton(jpg, "PNG format")
-      wid.pack_start(png, False, False)
-      
-      # Quality selector
-      adju = gtk.Adjustment(upper=101,lower=1,step_incr=1,page_incr=10,page_size=1,value=100)
-      qual_scale = gtk.HScale(adju)
-      def format_value(widg, value):
-		  return "%d%%" % value
-      qual_scale.connect("format-value", format_value)
-      qual_scale.set_digits(0)
-      qual_box = gtk.HBox()
-      qual_lab = gtk.Label("Quality (JPEG Only)")
-      qual_box.pack_start(qual_lab, False, False, 2)
-      qual_box.pack_start(qual_scale, True, True, 2)
-      wid.pack_start(qual_box, False, False)
-      frame.add(wid)
-      
-      frame.show_all()
       fc = gtk.FileChooserDialog(title="Save screenshot", parent=self.window, action=gtk.FILE_CHOOSER_ACTION_SAVE,buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_SAVE, gtk.RESPONSE_OK))
-      fc.set_extra_widget(frame)
       resp = fc.run()
       if(resp == gtk.RESPONSE_CANCEL):
          fc.destroy()
       elif(resp == gtk.RESPONSE_OK):
-         filetosave = fc.get_filename()
-         quality = qual_scale.get_value()
-         fc.destroy()
-         if(jpg.get_active()):
-            format = "jpeg"
-         else:
-            format = "png"
-            try:
-               self.image.save(filetosave, format, {"quality" : str(quality) })
-            except:
-               msg = "Failed to save file: " + filetosave
-               md = gtk.MessageDialog(parent=self.window, flags=0, type=gtk.MESSAGE_ERROR, buttons=gtk.BUTTONS_OK, message_format=msg)
-               md.connect("response", lambda: md.destroy())
-               md.show()
+		filetosave = fc.get_filename()
+		# Append .png if needed
+		if not filetosave.lower().endswith(".png"):
+			filetosave += ".png"
+		fc.destroy()
+		format = "png"
+		try:
+		   self.image.save(filetosave, format)
+		except:
+		   msg = "Failed to save file: " + filetosave
+		   md = gtk.MessageDialog(parent=self.window, flags=0, type=gtk.MESSAGE_ERROR, buttons=gtk.BUTTONS_OK, message_format=msg)
+		   md.connect("response", lambda: md.destroy())
+		   md.show()
 if __name__ == "__main__":
    gtk.gdk.threads_init()
    Shotter()
