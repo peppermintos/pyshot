@@ -79,7 +79,7 @@ class Shotter:
         self.ui.get_object("image").set_from_pixbuf(sshot)
         self.scale_factor = 0.04
         self.zoom_in(None)
-        if(should_hide):
+        if should_hide:
             self.window.show()
         self.window.set_sensitive(True)
         gtk.gdk.threads_leave()
@@ -101,7 +101,7 @@ class Shotter:
         w = float(img.get_width())
         h *= self.scale_factor
         w *= self.scale_factor
-        if(h > 0 and w > 0):
+        if h > 0 and w > 0:
             img2 = img.scale_simple(int(w), int(h), gtk.gdk.INTERP_BILINEAR)
             self.ui.get_object("image").set_from_pixbuf(img2)
         else:
@@ -113,9 +113,9 @@ class Shotter:
         fc = gtk.FileChooserDialog(title="Save screenshot", parent=self.window, action=gtk.FILE_CHOOSER_ACTION_SAVE,
                                    buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL, gtk.STOCK_SAVE, gtk.RESPONSE_OK))
         resp = fc.run()
-        if(resp == gtk.RESPONSE_CANCEL):
+        if resp == gtk.RESPONSE_CANCEL:
             fc.destroy()
-        elif(resp == gtk.RESPONSE_OK):
+        elif resp == gtk.RESPONSE_OK:
             filetosave = fc.get_filename()
         # Append .png if needed
         if not filetosave.lower().endswith(".png"):
